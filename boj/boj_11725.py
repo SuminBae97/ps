@@ -1,23 +1,23 @@
 import sys
-sys.setrecursionlimit(10**6)
+sys.setrecursionlimit(10**5)
 n = int(input())
 
+visited = [False]*(n+1)
 tree = [[] for _ in range(n+1)]
 parent = [0]*(n+1)
-visited = [False]*(n+1)
 
 for _ in range(n-1):
     a,b = map(int,sys.stdin.readline().split())
     tree[a].append(b)
     tree[b].append(a)
 
-def dfs(x):
-    visited[x]=True
-    for node in tree[x]:
-        if visited[node]==False:
-            parent[node]= x
-            dfs(node)
+def dfs(root):
+    visited[root]=True
+    for val in tree[root]:
+        if visited[val]==False:
+            parent[val]=root
+            dfs(val)
 
 dfs(1)
-for i in range(2,n+1):
+for i in range(2,len(parent)):
     print(parent[i])
