@@ -1,33 +1,36 @@
 import sys
-# 5
-# 2 3
-# 3 4
-# 3 1
-# 1 5
-# 3 5
-n = int(input())
-parent = [0]*(n+1)
-for _ in range(n-1):
-    a,b = map(int,sys.stdin.readline().split())
-    parent[b] =a
-print(parent)
-a,b = map(int,sys.stdin.readline().split())
-parent_a = [a]
-parent_b = [b]
+t = int(input())
 
-while parent[a]:
-    parent_a.append(parent[a])
-    a = parent[a]
+for _ in range(t):
+    n = int(input())
+    parent = [0]*(n+1) 
+    for _ in range(n-1):
+        a,b = map(int,sys.stdin.readline().split())
+        parent[b]=a
 
-while parent[b]:
-    parent_b.append(parent[b])
-    b = parent[b]
+    m,n = map(int,sys.stdin.readline().split())
+    parent_m = [m]
+    parent_n = [n]
 
-print(parent_b)
-a_root = len(parent_a)-1
-b_root = len(parent_b)-1
 
-while parent_a[a_root]==parent_b[b_root]:
-    a_root-=1
-    b_root-=1
-print(parent_a[a_root+1])
+    while parent[m]:
+        parent_m.append(parent[m])
+        m = parent[m]
+
+    while parent[n]:
+        parent_n.append(parent[n])
+        n= parent[n]
+
+    last_m = len(parent_m)-1
+    last_n = len(parent_n)-1
+
+    while parent_m[last_m]==parent_n[last_n]:
+        last_m-=1
+        last_n-=1
+
+    print(parent_m[last_m+1])
+
+
+
+
+
